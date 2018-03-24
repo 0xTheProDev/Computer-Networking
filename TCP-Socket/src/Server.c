@@ -60,8 +60,8 @@ int main(int argc, const char* argv[]) {
     }
     printf("Server started at %s:%d\n", inet_ntoa(server.sin_addr), SOCKET_PORT);
     while (! signaled) {
-        int client_addr_len = sizeof(client);
-        int cfd = accept(sfd, (struct sockaddr *) &client, (socklen_t *) &client_addr_len);
+        socklen_t client_addr_len = sizeof(client);
+        int cfd = accept(sfd, (struct sockaddr *) &client, &client_addr_len);
         if (cfd < 0) {
             fprintf(stderr, "Failed to accept client connection\n");
             close(sfd);
